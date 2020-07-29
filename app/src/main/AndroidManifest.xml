@@ -9,8 +9,7 @@
         android:roundIcon="@mipmap/course_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PhuHuynhActivity"></activity>
-        <activity android:name=".SinhVienActivity" />
+        <activity android:name=".GiangVienActivity"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,11 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".MainNavigation"
-            android:label="@string/title_activity_main22"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PhuHuynhActivity" />
+        <activity android:name=".SinhVienActivity" />
     </application>
 
 </manifest>

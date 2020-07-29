@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/itemThemSV"
+        android:title="Thêm Sinh Viên"
+        android:icon="@drawable/ic_baseline_add_circle_24"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/itemSuaSV"
+        android:title="Sữa thông tin"
+        android:icon="@drawable/ic_baseline_edit_24"/>
+    <item
+        android:id="@+id/itemXoa"
+        android:title="Xóa"
+        android:icon="@drawable/ic_baseline_delete_24"/>
+</menu>

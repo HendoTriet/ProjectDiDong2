@@ -1,8 +1,5 @@
 package com.example.projectdidong;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +10,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
     Button btnCancel, btnLogin;
@@ -35,20 +35,21 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener ( new View.OnClickListener ( ) {
             @Override
             public void onClick ( View v ) {
-                if(radGiangVien.isChecked ()){
-                    if(!edtTK.getText ().toString ().equals ( "gv1" ) || (!edtPass.getText ().toString ().equals ( "123" ))){
-                        tvError.setText ( "Tài khoản hoặc mật khẩu sai !!! " );
-
-                    }else {
-                        Intent intent = new Intent ( LoginActivity.this , MainNavigation.class );
-                        startActivity (intent);
-                    }
-                }
-                else if(radSinhVien.isChecked ()){
-                    Intent intent = new Intent (LoginActivity.this, SinhVienActivity.class);
+                if (radGiangVien.isChecked ( )) {
+                    Intent intent = new Intent ( LoginActivity.this , GiangVienActivity.class );
                     startActivity ( intent );
-                }else if(radPhuHuynh.isChecked ()){
-                    Intent intent = new Intent ( LoginActivity.this,SinhVienActivity.class );
+
+//                    if(!edtTK.getText ().toString ().equals ( "gv1" ) || (!edtPass.getText ().toString ().equals ( "123" ))){
+//                        tvError.setText ( "Tài khoản hoặc mật khẩu sai !!! " );
+//
+//                    }else {
+//
+//                    }
+                } else if (radSinhVien.isChecked ( )) {
+                    Intent intent = new Intent ( LoginActivity.this , SinhVienActivity.class );
+                    startActivity ( intent );
+                } else if (radPhuHuynh.isChecked ( )) {
+                    Intent intent = new Intent ( LoginActivity.this , PhuHuynhActivity.class );
                     startActivity ( intent );
                 }
             }
