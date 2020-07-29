@@ -1,0 +1,94 @@
+package com.example.projectdidong;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.Menu;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.navigation.NavigationView;
+
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.widget.Toolbar;
+
+import java.util.ArrayList;
+
+import ListViewAdapter.Adapter;
+import ListViewAdapter.SinhVien;
+
+public class MainNavigation extends LoginActivity {
+    private AppBarConfiguration mAppBarConfiguration;
+    ListView listView;
+    ArrayList<String> data_mon = new ArrayList<> ( );
+    ArrayList<SinhVien> data_sv = new ArrayList<> ( );
+    ArrayAdapter arrayAdapter_khoa;
+    Adapter adapter_SV;
+
+    @Override
+    protected void onCreate ( Bundle savedInstanceState ) {
+        super.onCreate ( savedInstanceState );
+        setContentView ( R.layout.layout_navigation );
+        KhoiTao ( );
+        setEvent ( );
+        setControl();
+        Toolbar toolbar = findViewById ( R.id.toolbar );
+        setSupportActionBar ( toolbar );
+        FloatingActionButton fab = findViewById ( R.id.fab );
+        fab.setOnClickListener ( new View.OnClickListener ( ) {
+            @Override
+            public void onClick ( View view ) {
+                Snackbar.make ( view , "Replace with your own action" , Snackbar.LENGTH_LONG )
+                        .setAction ( "Action" , null ).show ( );
+            }
+        } );
+        DrawerLayout drawer = findViewById ( R.id.drawer_layout );
+        NavigationView navigationView = findViewById ( R.id.nav_view );
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        mAppBarConfiguration = new AppBarConfiguration.Builder (
+                R.id.nav_home , R.id.nav_gallery , R.id.nav_slideshow )
+                .setDrawerLayout ( drawer )
+                .build ( );
+        NavController navController = Navigation.findNavController ( this , R.id.nav_host_fragment );
+        NavigationUI.setupActionBarWithNavController ( this , navController , mAppBarConfiguration );
+        NavigationUI.setupWithNavController ( navigationView , navController );
+    }
+    private void setControl(){
+        listView = findViewById ( R.id.lvDS );
+    }
+    private void setEvent ( ) {
+
+    }
+
+    private void KhoiTao ( ) {
+        data_sv = new ArrayList<> ( );
+        data_sv.add ( new SinhVien ( "NVA" , "Nam" , "1231231" , "toán" , "5" ) );
+        data_sv.add ( new SinhVien ( "NVA" , "Nam" , "1231231" , "toán" , "5" ) );
+        data_sv.add ( new SinhVien ( "NVA" , "Nam" , "1231231" , "toán" , "5" ) );
+        data_sv.add ( new SinhVien ( "NVA" , "Nam" , "1231231" , "toán" , "5" ) );
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu ( Menu menu ) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater ( ).inflate ( R.menu.menu_navigation , menu );
+
+        return true;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp ( ) {
+        NavController navController = Navigation.findNavController ( this , R.id.nav_host_fragment );
+        return NavigationUI.navigateUp ( navController , mAppBarConfiguration )
+                || super.onSupportNavigateUp ( );
+    }
+}
