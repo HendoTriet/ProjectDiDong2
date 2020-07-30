@@ -1,26 +1,30 @@
 package ListViewAdapter;
 
 public class SinhVien {
-    private String sHoTen,sGioiTinh,sMaSV,sMonHoc,sDiem;
+    private String sStt,
+            sHoTen,
+            sKhoa,
+            sMaSV,
+            sGioiTinh,
+            sMonHoc,
+            sDiem;
 
-    public SinhVien ( ) {
-    }
-
-
-    public String getsGioiTinh ( ) {
-        return sGioiTinh;
-    }
-
-    public void setsGioiTinh ( String sGioiTinh ) {
-        this.sGioiTinh = sGioiTinh;
-    }
-
-    public SinhVien ( String sHoTen, String sGioiTinh , String sMaSV , String sMonHoc , String sDiem ) {
+    public SinhVien ( String sStt , String sHoTen , String sKhoa , String sMaSV , String sGioiTinh , String sMonHoc , String sDiem ) {
+        this.sStt = sStt;
         this.sHoTen = sHoTen;
-        this.sGioiTinh = sGioiTinh;
+        this.sKhoa = sKhoa;
         this.sMaSV = sMaSV;
+        this.sGioiTinh = sGioiTinh;
         this.sMonHoc = sMonHoc;
         this.sDiem = sDiem;
+    }
+
+    public String getsStt ( ) {
+        return sStt;
+    }
+
+    public void setsStt ( String sStt ) {
+        this.sStt = sStt;
     }
 
     public String getsHoTen ( ) {
@@ -31,12 +35,28 @@ public class SinhVien {
         this.sHoTen = sHoTen;
     }
 
+    public String getsKhoa ( ) {
+        return sKhoa;
+    }
+
+    public void setsKhoa ( String sKhoa ) {
+        this.sKhoa = sKhoa;
+    }
+
     public String getsMaSV ( ) {
         return sMaSV;
     }
 
     public void setsMaSV ( String sMaSV ) {
         this.sMaSV = sMaSV;
+    }
+
+    public String getsGioiTinh ( ) {
+        return sGioiTinh;
+    }
+
+    public void setsGioiTinh ( String sGioiTinh ) {
+        this.sGioiTinh = sGioiTinh;
     }
 
     public String getsMonHoc ( ) {
@@ -55,17 +75,18 @@ public class SinhVien {
         this.sDiem = sDiem;
     }
 
+    public SinhVien ( ) {
+    }
+
     @Override
     public String toString ( ) {
         return "SinhVien{" +
                 "sHoTen='" + sHoTen + '\'' +
-                ", sGioiTinh='" + sGioiTinh + '\'' +
+                ", sKhoa='" + sKhoa + '\'' +
                 ", sMaSV='" + sMaSV + '\'' +
+                ", sGioiTinh='" + sGioiTinh + '\'' +
                 ", sMonHoc='" + sMonHoc + '\'' +
                 ", sDiem='" + sDiem + '\'' +
                 '}';
     }
-
-
-
 }

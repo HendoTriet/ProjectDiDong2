@@ -26,7 +26,7 @@ public class SinhVienAdapter extends ArrayAdapter<SinhVien> {
     int resource;
     ArrayList<SinhVien> data;
     ImageView btnMenu;
-    TextView txtHoTen, txtGioiTinh, txtMaSV, txtMonHoc, txtDiem;
+    TextView txtHoTen, txtGioiTinh, txtMaSV, txtMonHoc, txtDiem,txtKhoa;
 
     public SinhVienAdapter ( @NonNull Activity activity , int resource , @NonNull ArrayList<SinhVien> data ) {
         super ( activity , resource , data );
@@ -47,6 +47,7 @@ public class SinhVienAdapter extends ArrayAdapter<SinhVien> {
         final View view = inflater.inflate ( this.resource , null );
 
         //khai báo thuộc tính
+        txtKhoa = view.findViewById ( R.id.txtKhoa );
         txtHoTen = view.findViewById ( R.id.txtHoTen );
         txtGioiTinh = view.findViewById ( R.id.txtGioiTinh );
         txtMaSV = view.findViewById ( R.id.txtMaSV );
@@ -55,6 +56,7 @@ public class SinhVienAdapter extends ArrayAdapter<SinhVien> {
         btnMenu = view.findViewById ( R.id.btnMenu );
         //đưa dữ liệu vào
         final SinhVien sinhVien = this.data.get ( position );
+        txtKhoa.setText ( sinhVien.getsKhoa () );
         txtHoTen.setText ( sinhVien.getsHoTen ( ) );
         txtGioiTinh.setText ( sinhVien.getsGioiTinh ( ) );
         txtMaSV.setText ( sinhVien.getsMaSV ( ) );
@@ -71,12 +73,14 @@ public class SinhVienAdapter extends ArrayAdapter<SinhVien> {
                         if (menuItem.getItemId ( ) == R.id.itemThemSV) {
                             Toast.makeText ( activity , "them thong tin" , Toast.LENGTH_SHORT ).show ( );
                         } else if (menuItem.getItemId ( ) == R.id.itemSuaSV) {
+                            Toast.makeText ( activity , "sua sv" + sinhVien.getsKhoa ( ) , Toast.LENGTH_SHORT ).show ( );
                             Toast.makeText ( activity , "sua sv" + sinhVien.getsHoTen ( ) , Toast.LENGTH_SHORT ).show ( );
                             Toast.makeText ( activity , "sua sv" + sinhVien.getsGioiTinh ( ) , Toast.LENGTH_SHORT ).show ( );
                             Toast.makeText ( activity , "sua sv" + sinhVien.getsMaSV ( ) , Toast.LENGTH_SHORT ).show ( );
                             Toast.makeText ( activity , "sua sv" + sinhVien.getsMonHoc ( ) , Toast.LENGTH_SHORT ).show ( );
                             Toast.makeText ( activity , "sua sv" + sinhVien.getsDiem ( ) , Toast.LENGTH_SHORT ).show ( );
                         } else if (menuItem.getItemId ( ) == R.id.itemXoa) {
+                            Toast.makeText ( activity , "Xoa" + sinhVien.getsKhoa ( ) , Toast.LENGTH_SHORT ).show ( );
                             Toast.makeText ( activity , "Xoa" + sinhVien.getsHoTen ( ) , Toast.LENGTH_SHORT ).show ( );
                             Toast.makeText ( activity , "Xoa" + sinhVien.getsGioiTinh ( ) , Toast.LENGTH_SHORT ).show ( );
                             Toast.makeText ( activity , "Xoa" + sinhVien.getsMaSV ( ) , Toast.LENGTH_SHORT ).show ( );
@@ -86,22 +90,22 @@ public class SinhVienAdapter extends ArrayAdapter<SinhVien> {
                         return false;
                     }
                 } );
-                popupMenu.getMenuInflater ( ).inflate ( R.menu.menu , popupMenu.getMenu ());
+                popupMenu.getMenuInflater ( ).inflate ( R.menu.menu , popupMenu.getMenu ( ) );
                 //show icon
                 try {
-                    Field[] fields = popupMenu.getClass().getDeclaredFields();
+                    Field[] fields = popupMenu.getClass ( ).getDeclaredFields ( );
                     for (Field field : fields) {
-                        if ("mPopup".equals(field.getName())) {
-                            field.setAccessible(true);
-                            Object menuPopupHelper = field.get(popupMenu);
-                            Class<?> classPopupHelper = Class.forName(menuPopupHelper.getClass().getName());
-                            Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon",boolean.class);
-                            setForceIcons.invoke(menuPopupHelper, true);
+                        if ("mPopup".equals ( field.getName ( ) )) {
+                            field.setAccessible ( true );
+                            Object menuPopupHelper = field.get ( popupMenu );
+                            Class<?> classPopupHelper = Class.forName ( menuPopupHelper.getClass ( ).getName ( ) );
+                            Method setForceIcons = classPopupHelper.getMethod ( "setForceShowIcon" , boolean.class );
+                            setForceIcons.invoke ( menuPopupHelper , true );
                             break;
                         }
                     }
-                }catch (Exception e){
-                    e.printStackTrace ();
+                } catch (Exception e) {
+                    e.printStackTrace ( );
                 }
                 popupMenu.show ( );
             }

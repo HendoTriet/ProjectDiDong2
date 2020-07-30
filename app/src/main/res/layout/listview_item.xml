@@ -13,7 +13,7 @@
         <ImageView
             android:id="@+id/btnMenu"
             android:layout_width="402dp"
-            android:layout_height="match_parent"
+            android:layout_height="211dp"
             android:layout_gravity="top|right">
 
         </ImageView>
@@ -24,6 +24,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <TextView
         android:id="@+id/txtHoTen"
         android:layout_width="match_parent"
@@ -58,7 +59,7 @@
         android:background="@color/colorRed"></TextView>
 
     <TextView
-        android:id="@+id/txtMonHoc"
+        android:id="@+id/txtKhoa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24dp" />
@@ -67,6 +68,17 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/colorRed"></TextView>
+
+    <TextView
+        android:id="@+id/txtMonHoc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/colorPrimaryDark"></TextView>
 
     <TextView
         android:id="@+id/txtDiem"
