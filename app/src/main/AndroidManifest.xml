@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.projectdidong">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/course_icon"
@@ -9,7 +12,7 @@
         android:roundIcon="@mipmap/course_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GiangVienActivity"></activity>
+        <activity android:name=".LopActivity"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,8 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PhuHuynhActivity" />
-        <activity android:name=".SinhVienActivity" />
+        <activity android:name=".DiemActivity" />
+        <activity android:name=".KhoaActivity" />
     </application>
 
 </manifest>

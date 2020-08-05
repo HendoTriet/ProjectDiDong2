@@ -6,13 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".LoginActivity"
-    android:background="@drawable/background_mobile">
+    android:background="@drawable/backgroud"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical">
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,31 +22,6 @@
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="horizontal">
-<RadioGroup
-    android:id="@+id/radGroup"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:gravity="center">
-    <RadioButton
-        android:id="@+id/cbGiangVien"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Giảng Viên" />
-
-    <RadioButton
-        android:id="@+id/cbSinhVien"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sinh Viên" />
-
-    <RadioButton
-        android:id="@+id/cbPhuHuynh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Phụ huynh" />
-
-</RadioGroup>
 
     </LinearLayout>
 
@@ -131,6 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorAccent"
+            android:layout_margin="20dp"
             android:text="Login" />
 
         <Button
@@ -142,4 +120,5 @@
             android:background="@color/colorPrimary"
             android:text="Cancel" />
     </LinearLayout>
+
 </LinearLayout>
