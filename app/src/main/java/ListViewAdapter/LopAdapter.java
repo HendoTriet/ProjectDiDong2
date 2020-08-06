@@ -1,5 +1,6 @@
 package ListViewAdapter;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,52 +32,60 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class LopAdapter extends ArrayAdapter<Lop> {
+    int re;
+    ArrayList<Lop> ar;
+    Context c;
+    DatabaseReference mData;
+    public static String userId;
 
-    private int resource;
-    private Context context;
-    private ArrayList<Lop> lopArrayList;
-    DatabaseReference myRef;
-    private TextView tvLop;
-    private ImageView imgHinh;
 
-    public LopAdapter ( @NonNull Context context , int resource , @NonNull ArrayList<Lop> objects ) {
-        super ( context , resource , objects );
-        this.context = context;
-        this.resource = resource;
-        this.lopArrayList = objects;
-        myRef = FirebaseDatabase.getInstance ( ).getReference ( "dbLop" );
+    public LopAdapter ( @NonNull Activity activity , int resource , @NonNull ArrayList<Lop> objects ) {
+        super ( activity , resource , objects );
+        this.re = resource;
+        this.c = activity;
+        this.ar = objects;
+        mData = FirebaseDatabase.getInstance ( ).getReference ( );
     }
 
     @NonNull
     @Override
     public View getView ( final int position , @Nullable View convertView , @NonNull ViewGroup parent ) {
+
         View view = convertView;
+        final ViewHolor viewholor;
+        if (view == null) {
+//            ar=new ArrayList<Lop>()
+            LayoutInflater layoutInflater = LayoutInflater.from ( c );
+            view = layoutInflater.inflate ( re , null );
+            viewholor = new ViewHolor ( );
+            viewholor.textViewLop = (TextView) view.findViewById ( R.id.txtTenLop );
 
-        LayoutInflater layoutInflater = LayoutInflater.from ( context );
-        view = layoutInflater.inflate ( resource , null );
-        tvLop = view.findViewById ( R.id.tvLop );
-        imgHinh = view.findViewById ( R.id.imvHinh );
+            view.setTag ( viewholor );
+        } else {
+            viewholor = (ViewHolor) view.getTag ( );
+        }
+        final Lop sinhvienhientai = ar.get ( position );
+        //gan gia tri len cac textview
 
-        Lop svCu = lopArrayList.get ( position );
-        tvLop.setText ( svCu.getTenLop ( ) );
-        imgHinh.setOnClickListener ( new View.OnClickListener ( ) {
+        viewholor.textViewLop.setText ( sinhvienhientai.getsTenLop ( ) );
+
+        viewholor.imageView.setOnClickListener ( new View.OnClickListener ( ) {
             @Override
             public void onClick ( View v ) {
-                showMenuItem ( v , position );
+                ShowmenuItem ( v, position );
             }
         } );
-
         return view;
     }
 
-    public void showMenuItem ( final View view , final int vitri ) {
-        PopupMenu popupMenu = new PopupMenu ( context , view );
-        popupMenu.getMenuInflater ( ).inflate ( R.menu.menu_list_lop , popupMenu.getMenu ( ) );
+    public void ShowmenuItem ( final View view , final int vitri ) {
+        PopupMenu popupMenu = new PopupMenu ( c , view );
+        popupMenu.getMenuInflater ( ).inflate ( R.menu.menu_chucnang , popupMenu.getMenu ( ) );
         popupMenu.setOnMenuItemClickListener ( new PopupMenu.OnMenuItemClickListener ( ) {
             @Override
             public boolean onMenuItemClick ( MenuItem item ) {
-                if (item.getItemId ( ) == R.id.RemoveItem) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder ( context );
+                if (item.getItemId ( ) == R.id.idEdit) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder ( c );
                     builder.setTitle ( "Xóa" );// Set tiêu đề
                     builder.setMessage ( "Bạn có muốn xóa không" );//Set nội dung cho Dialog
                     builder.setCancelable ( false );//Set có cho người dùng Cancer bằng nút quay lại (back) ko? false: ko
@@ -84,8 +93,10 @@ public class LopAdapter extends ArrayAdapter<Lop> {
 
                         @Override
                         public void onClick ( DialogInterface dialog , int which ) {
-                            myRef.child ( "Lop" ).child ( lopArrayList.get ( vitri ).getIdLop ( ) ).removeValue ( );
-                            lopArrayList.remove ( vitri );
+                            //Làm cái gì đó khi ấn Yes tại đây
+//                        dialog.dismiss();
+                            mData.child ( "Lop" ).child ( ar.get ( vitri ).getsID ( ) ).removeValue ( );
+                            ar.remove ( vitri );
                             notifyDataSetChanged ( );
                         }
                     } );
@@ -93,12 +104,13 @@ public class LopAdapter extends ArrayAdapter<Lop> {
 
                         @Override
                         public void onClick ( DialogInterface dialog , int which ) {
+                            //
                             dialog.cancel ( );
                         }
                     } );
                     builder.show ( );//Hiển thị Dialog
-                } else if (item.getItemId ( ) == R.id.EditItem) {
-                    dialogsua ( lopArrayList.get ( vitri ),vitri );
+                } else if (item.getItemId ( ) == R.id.idEdit) {
+                    dialogsua ( ar.get ( vitri ) , vitri );
                     notifyDataSetChanged ( );
                 }
                 return false;
@@ -106,53 +118,49 @@ public class LopAdapter extends ArrayAdapter<Lop> {
         } );
         popupMenu.show ( );
     }
-
-    public void dialogsua ( Lop suaLop , final int vitri ) {
-
+    public void dialogsua ( final Lop sualop , final int vitri ) {
         //khoitao dialog
-        final Dialog dialog = new Dialog ( context );
+        final Dialog dialog = new Dialog ( c );
         //xet layout cho dialog
-        dialog.setContentView ( R.layout.layout_sualop );
+        dialog.setContentView ( R.layout.item_cn );
         //xet tieu de cho dialog
         dialog.setTitle ( "Sửa lớp" );
         //khai bao button trong dialog de bat su kien
         Button btnThoat = (Button) dialog.findViewById ( R.id.btnThoat );
         Button btnLuu = (Button) dialog.findViewById ( R.id.btnLuu );
         final EditText EditTenLop;
-        EditTenLop = (EditText) dialog.findViewById ( R.id.edtLop );
+        EditTenLop = (EditText) dialog.findViewById ( R.id.editTextLop );
 
-        myRef = FirebaseDatabase.getInstance ( ).getReference ( "dbLop" );
-
+        mData = FirebaseDatabase.getInstance ( ).getReference ( );
         //set cac gia tri hien thoi cua sinh vien can sua
-        EditTenLop.setText ( suaLop.getTenLop ( ) );
+        EditTenLop.setText ( sualop.getsTenLop ( ) );
         //bat su kien cho nut dang ki
         btnLuu.setOnClickListener ( new View.OnClickListener ( ) {
             @Override
             public void onClick ( View v ) {
                 String ten;
                 ten = EditTenLop.getText ( ).toString ( );
-
                 if (EditTenLop.equals ( "" ) || EditTenLop.length ( ) == 0) {
                     EditTenLop.setError ( "Không được để trống" );
                 } else {
-                    final Lop lop = new Lop ( ten );
-                    myRef.child ( "Lop" ).child ( lopArrayList.get ( vitri ).getIdLop ( ) ).addListenerForSingleValueEvent ( new ValueEventListener ( ) {
+                    final Lop svnew = new Lop ( ten );
+//                    mData.child("Lop").child(ar.get(vitri).getIdlop()).updateChildren(svnew);
 
+//                    mData.child("Lop").child(ar.get(vitri).getIdlop()).setValue(svnew);
+                    mData.child ( "Lop" ).child ( ar.get ( vitri ).getsID ( ) ).addListenerForSingleValueEvent ( new ValueEventListener ( ) {
                         @Override
                         public void onDataChange ( DataSnapshot dataSnapshot ) {
-                            Log.d ( "bienar01" , lopArrayList.get ( vitri ).getTenLop ( ) );
-                            dataSnapshot.getRef ( ).setValue ( lop );
-
+                            Log.d ( "bienar01" , ar.get ( vitri ).getsTenLop ( ) );
+                            dataSnapshot.getRef ( ).setValue ( svnew );
 
 //                            mData.child("Lop").child(ar.get(vitri).getIdlop()).setValue(svnew);
-                            String idcu = lopArrayList.get ( vitri ).getIdLop ( );
-                            lopArrayList.set ( vitri , new Lop ( lop.getTenLop ( ) , idcu ) );
-                            Log.d ( "bienar02" , lopArrayList.get ( vitri ).getTenLop ( ) );
+                            String idcu = ar.get ( vitri ).getsID ( );
+                            ar.set ( vitri , new Lop ( svnew.getsTenLop ( ) , idcu ) );
+                            Log.d ( "bienar02" , ar.get ( vitri ).getsTenLop ( ) );
                             notifyDataSetChanged ( );
                         }
                         @Override
                         public void onCancelled ( DatabaseError databaseError ) {
-
                         }
                     } );
 
@@ -161,8 +169,11 @@ public class LopAdapter extends ArrayAdapter<Lop> {
 
                     notifyDataSetChanged ( );
                     dialog.dismiss ( );
-                    Toast.makeText ( context , "Sủa thành công " + EditTenLop.getText ( ) , Toast.LENGTH_SHORT ).show ( );
+                    Toast.makeText ( c , "Sủa thành công " + EditTenLop.getText ( ) , Toast.LENGTH_SHORT ).show ( );
+
                 }
+
+
             }
         } );
         btnThoat.setOnClickListener ( new View.OnClickListener ( ) {
@@ -177,5 +188,9 @@ public class LopAdapter extends ArrayAdapter<Lop> {
         //hien thi dialog
 
 
+    }
+    public class ViewHolor {
+        TextView textViewLop;
+        ImageView imageViewLop, imageView;
     }
 }

@@ -1,33 +1,54 @@
 package com.example.projectdidong.Model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Lop {
-    private String tenLop;
-    private String idLop;
+    String sTenLop, sID;
+
+    public String getsTenLop ( ) {
+        return sTenLop;
+    }
+
+    public void setsTenLop ( String sTenLop ) {
+        this.sTenLop = sTenLop;
+    }
+
+    public String getsID ( ) {
+        return sID;
+    }
+
+    public void setsID ( ) {
+        this.sID = sID;
+    }
+
+    public Lop ( String sTenLop , String sID ) {
+        this.sTenLop = sTenLop;
+        this.sID = sID;
+    }
 
     public Lop ( ) {
     }
 
-    public Lop ( String tenLop ) {
+    public Lop ( String sTenLop ) {
+        this.sTenLop = sTenLop;
     }
 
-    public Lop ( String tenLop , String idLop ) {
-        this.tenLop = tenLop;
-        this.idLop = idLop;
+    @Override
+    public String toString ( ) {
+        return "Lop{" +
+                "sTenLop='" + sTenLop + '\'' +
+                ", sID='" + sID + '\'' +
+                '}';
     }
 
-    public String getTenLop ( ) {
-        return tenLop;
+
+    public Map<String, Object> toMap ( ) {
+        HashMap<String, Object> result = new HashMap<> ( );
+        result.put ( "idLop" , sID );
+        result.put ( "tenLop" , sTenLop );
+        return result;
     }
 
-    public void setTenLop ( String tenLop ) {
-        this.tenLop = tenLop;
-    }
 
-    public String getIdLop ( ) {
-        return idLop;
-    }
-
-    public void setIdLop ( String idLop ) {
-        this.idLop = idLop;
-    }
 }

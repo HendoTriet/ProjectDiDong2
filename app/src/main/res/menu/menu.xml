@@ -5,6 +5,10 @@
         android:id="@+id/menuitemthem"
         android:title="add"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_baseline_add_box_24"
-        />
+        android:icon="@drawable/ic_baseline_add_box_24"/>
+    <item
+        android:id="@+id/menuitemLogOut"
+        android:title="Logout"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_baseline_exit_to_app_24"/>
 </menu>

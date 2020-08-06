@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/EditTenSV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Tên sinh viên"
+            android:textColor="#f00"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/EditMaSV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Mã sinh viên" />
+
+        <Spinner
+            android:id="@+id/spinnerGIOITINH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
+
+        <EditText
+            android:id="@+id/EditDiaChi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-20dp"
+android:hint="Địa chỉ"
+
+            />
+
+        <EditText
+            android:id="@+id/EditNgaySinh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ngày sinh"/>
+
+        <EditText
+            android:id="@+id/EditSDT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Số điện thoại"/>
+
+        <EditText
+            android:id="@+id/EditCMND"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Số chứng minh nhân dân"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/btnLuu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lưu" />
+
+        <Button
+            android:id="@+id/btnThoat"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Thoát" />
+    </LinearLayout>
+</LinearLayout>
+
